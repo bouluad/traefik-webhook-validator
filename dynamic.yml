@@ -1,0 +1,22 @@
+http:
+  routers:
+    webhook:
+      rule: "Path(`/webhook`)"
+      service: jenkins1
+      entryPoints:
+        - web
+      middlewares:
+        - validate-secret
+
+  middlewares:
+    validate-secret:
+      plugin:
+        validate:
+          secretField: "secret"
+          secretValue: "supersecret"
+
+  services:
+    jenkins1:
+      loadBalancer:
+        servers:
+          - url: "http://jenkins1.internal:8080"
