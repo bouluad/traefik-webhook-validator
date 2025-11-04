@@ -1,0 +1,14 @@
+entryPoints:
+  web:
+    address: ":80"
+
+providers:
+  file:
+    directory: ./dynamic
+    watch: true
+
+experimental:
+  plugins:
+    validate:
+      local:
+        path: ./plugins/validate
